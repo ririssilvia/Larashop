@@ -1,152 +1,108 @@
-@extends('layouts.master')
+<html>
+<head>
+	<title>desain</title>
+<style>
+	table {width:100%}
+	#th {background-color:#3366FF; border-top:10px solid #000099 ; border-bottom:10px solid #000099; }
+	#img {height:125px; width: 125px; padding-bottom: 10px;}
+	.img {height: 125; width: 1170px}
+	#font {font-size: 60px; color: #000000;padding-top: 30px}
+	.font {font-size: 20px; color: #000000;padding-top: 10px}
+	.hm {color: #FF0000; padding-bottom: 5px}
+	th {background-color: #00FFFF; text-align: left;}
+	#alg {vertical-align: top; width: 200px;}
+	#td {background-color:#3366FF; color:#000000; border-bottom:10px solid #000099; text-align: center; padding:20px}
+	#gt {height: 150px; font-size: 15px;}
+</style>
+</head>
+<body bgcolor ="white">
+<table width="100%">
+<tr>
+	<td colspan="4" id="th">
+		<table>
+		<tr>
+			<td rowspan="2"><img src="img/1.png" id="img"/></td>
+			<td id="font">SELAMAT DATANG DI WEB SAYA</td>
+			<td class="font"><b>SMKN 1 TUREN </td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+	<td align="right" ><form>Search &nbsp <input type="name"></form></td>
+</tr>
+</table>
+<table width="100%">
+<tr>
+	<td rowspan="2" bgcolor="#000099" id="alg">
+		<table  id="gt">
+		<tr>
+			<th>Home</th>
+		</tr>
+		<tr>
+			<th><a href ="identitassekolah.html">Identitas sekolah</a></th>
+		</tr>
+		<tr>
+			<th><a href="identitasdiri.html"> Identitas diri</a></th>
+		</tr>
+		<tr>
+			<th>Author</a></th>
+		</tr>
+		<tr>
+			<th>About us</a></th>
+		</tr>
 
-@section('content')
-<!-- Page Content -->
-<div class="container">
-  
-    <div class="row">
-      <!-- Blog Entries Column -->
-      <div class="col-md-8">
-  
-        <h1 class="my-4">HOME</h1>
-  
-        <!-- Blog Post -->
-        @foreach ($data_article as $artic)
-        <div class="card mb-4">
-            <img class="card-img-top" src="{{$artic->featured_image}}" alt="Card image cap">
-            <div class="card-body">
-                <h2 class="card-title">{{ $artic->title }}</h2>
-            <p class="card-text">{{ Str::limit($artic->content, 100, '...') }}</p>
-                <a href="{{ './article/'.$artic->id }}" class="btn btn-primary">Read More &rarr;</a>
-            </div>
-            <div class="card-footer text-muted">
-                Posted on October 1, 2020 by
-                <a href="http://localhost:8000/about" target="_blank">Uswatun Khasanah</a>
-            </div>
-        </div>
-        @endforeach
-  
-        <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
-         {{$data_article->links()}}
-        </ul>
-  
-      </div>
-  
-      <!-- Sidebar Widgets Column -->
-      <div class="col-md-4">
-        
-      <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-    <a class="navbar-brand" href="/home">WELCOME TO MY WEBSITE </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button> 
-      <div class="collapse navbar-collapse" id="navbarResponsive"> 
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/contact">Contact
-            </a>
-          </li>
-          @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-        </ul>
-      </div>
-    </div>
-  </nav>
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-secondary" type="button"><a href="https://www.google.com/" target="_blank">Go!</a></button>
-              </span>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Category</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="https://en.wikipedia.org/wiki/Web_design" target="_blank">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="https://en.wikipedia.org/wiki/HTML" target="_blank">HTML</a>
-                  </li>
-                  <li>
-                    <a href="https://laravel.com/">Laravel</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="https://laravel.com/docs/6.x/routing">Routing</a>
-                  </li>
-                  <li>
-                    <a href="https://laravel.com/docs/6.x/controllers">Controllers</a>
-                  </li>
-                  <li>
-                    <a href="https://laravel.com/docs/6.x/views">Views</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
-          <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-          </div>
-        </div>
-  
-      </div>
-  
-    </div>
-    <!-- /.row -->
- 
-  </div>
-  @endsection
+		</table>
+	</td>
+	<td>
+		<table>
+		<tr>
+			<td colspan="2"><img src="img/3.jpg" class="img"/></td>
+		</tr>
+		<tr>
+		<td>
+			<table>
+			<tr>
+				<td><p align="center"><b>SELAMAT DATANG DI WEB SAYA<br>16 Februari 2020</b></td>
+			</tr>
+			<tr/><tr/>
+			<tr>
+				<td><i>Selamat datang</i>
+				<br><B>SMK Negeri1 Turen</B> adalah  salah satu sekolah favorit yang berada di kota wisata Turen,<br> yang berada di selatan kabuaten Malang.
+				Merupakan salah satu sekolah adiwiyata, dan sekranag telah </br>memperoleh banyak sekali prestasi.
+				 memiliki 7  program keahlian study yang bisa Anda pilih. Anda bisa melihat  di samping ini</td></br>
+	</tr>
+			</table>
+		</td>
+		<td>
+			<table bgcolor="#0099FF" height="100%" width="100%">
+			<tr>
+				<td><b>JURUSAN<b></td>
+			</tr>
+			<tr>
+				<td><ul><li>ADMINISTRASI PERKANTORAN</li>
+						<li>AKUNTANSI</li>
+						<li>TEKNIK KOMPUTER DAN JARINGAN</li>
+						<li>TATA BUSANA</li>
+						<li>JASA BOGA</li>
+						<li>PEMASARAN</li>
+						<li>AKOMONDASI PERHOTELAN</li></ul></td>
+			</tr>
+			</table>
+		</td>
+		</tr>
+		</table>
+		</td>
+	</td>
+	<tr height="75px">
+		<td colspan="2">Read More...</td>
+	</tr>
+</tr>
+</table>
+<table>
+<tr>
+	<td id="td"><b>Crated by:Riris silvia zahri/23/MI 1 A @2020 </b></td>
+</tr>
+</table>
+</body>
+</html>
